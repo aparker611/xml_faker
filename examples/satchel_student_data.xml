@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Satchel xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <Header>
+    <AcademicYear>2017</AcademicYear>
+  </Header>
+  <Students>
+    <Student>
+      <MIS_ID>1</MIS_ID>
+      <Forename>Bart</Forename>
+      <Surname>Simpson</Surname>
+      <UPN>K352855589015</UPN>
+      <FormerUPN/>
+      <Gender>M</Gender>
+      <YearGroup>Year 6</YearGroup>
+      <EmailAddress>bart.simpson@springfield.com</EmailAddress>
+      <FirstLanguage>ENG</FirstLanguage>
+    </Student>
+    <Student>
+      <MIS_ID>2</MIS_ID>
+      <Forename>Lisa</Forename>
+      <Surname>Simpson</Surname>
+      <UPN>C398174713468</UPN>
+      <FormerUPN/>
+      <Gender>F</Gender>
+      <YearGroup>Year 4</YearGroup>
+      <EmailAddress>lisa.simpson@springfield.com</EmailAddress>
+      <FirstLanguage>ENG</FirstLanguage>
+    </Student>
+    <Student>
+      <MIS_ID>3</MIS_ID>
+      <Forename>Milhouse</Forename>
+      <Surname>Van Houten</Surname>
+      <UPN>H218800250169</UPN>
+      <FormerUPN/>
+      <Gender>M</Gender>
+      <YearGroup>Year 6</YearGroup>
+      <EmailAddress>milhouse@springfield.com</EmailAddress>
+      <FirstLanguage>ENG</FirstLanguage>
+    </Student>
+    <Student>
+      <MIS_ID>4</MIS_ID>
+      <Forename>Nelson</Forename>
+      <Surname>Muntz</Surname>
+      <UPN>H802799130438</UPN>
+      <FormerUPN>T075448257748</FormerUPN>
+      <Gender>M</Gender>
+      <YearGroup>Year 6</YearGroup>
+      <EmailAddress>nelson@springfield.com</EmailAddress>
+      <FirstLanguage>ENG</FirstLanguage>
+    </Student>
+    <Student>
+      <MIS_ID>5</MIS_ID>
+      <Forename>Ralph</Forename>
+      <Surname>Wiggum</Surname>
+      <UPN>A184811757273</UPN>
+      <FormerUPN/>
+      <Gender>M</Gender>
+      <YearGroup>Year 4</YearGroup>
+      <EmailAddress>ralph@springfield.com</EmailAddress>
+      <FirstLanguage>FRE</FirstLanguage>
+    </Student>
+    <Student>
+      <MIS_ID>6</MIS_ID>
+      <Forename>Kearney</Forename>
+      <Surname>Zzyzwicz</Surname>
+      <UPN>S535449032228</UPN>
+      <FormerUPN/>
+      <Gender>M</Gender>
+      <YearGroup>Year 6</YearGroup>
+      <EmailAddress>kearney@springfield.com</EmailAddress>
+      <FirstLanguage>POL</FirstLanguage>
+    </Student>
+    <Student>
+      <MIS_ID>7</MIS_ID>
+      <Forename>Allison</Forename>
+      <Surname>Taylor</Surname>
+      <UPN>Q096226749453</UPN>
+      <FormerUPN>E729201301402</FormerUPN>
+      <Gender>F</Gender>
+      <YearGroup>Year 3</YearGroup>
+      <EmailAddress/>
+      <FirstLanguage>ENG</FirstLanguage>
+    </Student>
+  </Students>
+</Satchel>

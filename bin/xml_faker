@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require './lib/xml_faker'
+
+XmlFaker.new.run ARGV.first
