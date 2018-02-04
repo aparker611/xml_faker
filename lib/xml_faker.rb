@@ -1,21 +1,33 @@
 require 'nokogiri'
+require 'faker'
 
 class XmlFaker
 
-def student_data
-  students = [
-    {ID: 1, UPN: "S535449032228", forename: "James", surname: "Penn", email: "jpenn@stanleypark.com", formerUPN: "S535449032229", gender: "Male", yearGroup: "Year 3", lang: "ENG"},
-    {ID: 2,UPN: "K535449032230", forename: "Sandy", surname: "Snow", email: "ssnow@stanleypark.com", formerUPN: "K535449032231", gender: "Female", yearGroup: "Year 2", lang: "ENG"},
-    {ID: 3, UPN: "J535449032230", forename: "Mike", surname: "Myers", email: "myers@stanleypark.com", formerUPN: "J535449032230", gender: "Male", yearGroup: "Year 5", lang: "ENG"},
-    {ID: 4, UPN: "P535449032228", forename: "Penny", surname: "Dyer", email: "pdyer@stanleypark.com", formerUPN: "P535449032229", gender: "Female", yearGroup: "Year 4", lang: "ENG"},
-    {ID: 5, UPN: "D535449032230", forename: "Roger", surname: "Smith", email: "rogers@stanleypark.com", formerUPN: "D535449032231", gender: "Male", yearGroup: "Year 1", lang: "ENG"},
-    {ID: 6, UPN: "E535449032230", forename: "Johnny", surname: "Johnson", email: "jjohnson@stanleypark.com", formerUPN: "E535449032230", gender: "Male", yearGroup: "Year 3", lang: "ENG"},
-    {ID: 7, UPN: "S695449032228", forename: "Robert", surname: "Pennfold", email: "rpennfold@stanleypark.com", formerUPN: "S535449033229", gender: "Male", yearGroup: "Year 2", lang: "ENG"},
-    {ID: 8, UPN: "R535449032230", forename: "Chelsey", surname: "Luigi", email: "chelluigi@stanleypark.com", formerUPN: "R535449032231", gender: "Female", yearGroup: "Year 4", lang: "ENG"}
+def get_student_data(file)
+  students = Nokogiri::XML(File.open(file))
+  names = students.css("Forename").map { |node| node.children.text }
+  mis_id  = students.css("MIS_ID").map { |node| node.children.text }
+
+  pupils = [
+    {ID: nil, UPN: "", forename: "", surname: "", email: "", formerUPN: "", gender: "", yearGroup: "", lang: ""}
   ]
 
-  return puts "Student list is empty!" if students.empty?
-  return students
+  student = pupils.shift
+
+  students.xpath('//Student').each do |students|
+    student[:forename]      = Faker::Name.first_name,
+    student[:surname]       = Faker::Name.last_name,
+    student[:UPN]           = Faker::Code.ean,
+    student[:formerUPN]     = Faker::Code.ean,
+    student[:gender]        = students.xpath('Gender').inner_html,
+    student[:yearGroup]     = students.xpath('YearGroup').inner_html,
+    student[:email]         = Faker::Internet.unique.email,
+    student[:lang]          = students.xpath('FirstLanguage').inner_html,
+    student[:ID]            = students.xpath('MIS_ID').inner_html
+
+    pupils << student.clone
+  end
+verify_student_data(pupils, file)
 end
 
 def verify_student_data(students, file)
@@ -28,10 +40,9 @@ end
 
 def run(file)
   return puts 'Please provide a valid filename' if file.nil?
-  return puts 'Please prove another valid filename, as this one already exists' if File.exist?(file)
+  return puts 'Please prove another valid filename, as this one already exists' if !File.exist?(file)
 
-  student = student_data
-  verify_student_data(student, file)
+  student = get_student_data(file)
 end
 
 def format_xml_file(students, file)
@@ -47,8 +58,9 @@ def format_xml_file(students, file)
   xml.Students {
     students.each { |student|
       xml.Student {
+
         xml.MIS_ID        student[:ID]
-        xml.Forename      student[:forename]
+        xml.Forename      student[:forename].first
         xml.Surname       student[:surname]
         xml.UPN           student[:UPN]
         xml.FormerUPN     student[:formerUPN]
@@ -60,11 +72,17 @@ def format_xml_file(students, file)
     }
   }
 end
-}.to_xml
+  }.to_xml
   validate_student_data(studentxml, file)
 end
 
 def create_xml_file(students, file)
+  file_path = file.split('.')
+  filename = file_path[1]
+  filepath = "./" + filename + "_fake_data"
+  file_extension = "." + file_path.last
+
+  file = filepath+file_extension
   File.open("#{file}", "w") { |f| f.write(students)}
 end
 
@@ -77,7 +95,6 @@ def validate_student_data(students, file)
   end
 
   create_xml_file(students, file)
-  p "Verified"
 end
 
 end
